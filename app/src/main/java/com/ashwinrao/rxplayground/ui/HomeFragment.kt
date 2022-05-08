@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.ashwinrao.rxplayground.R
 import com.ashwinrao.rxplayground.RxPlayground
 import com.ashwinrao.rxplayground.databinding.FragmentHomeBinding
 import com.ashwinrao.rxplayground.viewmodel.HomeViewModel
@@ -52,12 +53,12 @@ class HomeFragment : Fragment() {
     }
 
     private fun manageSubscription() {
-        val disposable = viewModel.posts.subscribe({ posts ->
+        val disposable = viewModel.fetchPosts().subscribe({ posts ->
             (binding.postList.adapter as TypicodePostAdapter).submitList(posts)
             Log.i(TAG, "Passing ${posts.size} posts to list adapter")
         }, { error ->
             Snackbar.make(binding.root, error.message.toString(), Snackbar.LENGTH_INDEFINITE)
-                .setAction("Refresh") { viewModel.fetchPosts() }
+                .setAction(getString(R.string.label_refresh)) { manageSubscription() }
                 .show()
             Log.e(TAG, "Failed to load posts because ${error.message}")
         })

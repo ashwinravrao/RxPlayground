@@ -2,4 +2,5 @@
     <string name="app_name">RxPlayground</string>
     <string name="hint_bird_species">Bird species</string>
     <string name="error_network_connection">Check your network connection and try again</string>
+    <string name="label_refresh">Refresh</string>
 </resources>
